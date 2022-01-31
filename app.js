@@ -1,31 +1,31 @@
 // getting-started.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-main().catch(err => console.log(err));
+main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/fruitsDB');
+  await mongoose.connect("mongodb://localhost:27017/fruitsDB");
 }
 
 const fruitSchema = new mongoose.Schema({
-    name: {
-      type: String, 
-      //required: [true, "PLEASE ADD NAME"], 
-    },
-    rating: {
-      type: Number,
-      min: 1, 
-      max: 10
-    },
-    review: String
+  name: {
+    type: String,
+    //required: [true, "PLEASE ADD NAME"],
+  },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 10,
+  },
+  review: String,
 });
 
-const fruit = mongoose.model('fruit', fruitSchema);
+const fruit = mongoose.model("fruit", fruitSchema);
 
 const fruits = new fruit({
-    name: 'Paw paw',
-    rating: 10,
-    review: 'Deliscious'
+  name: "Paw paw",
+  rating: 10,
+  review: "Deliscious",
 });
 
 fruits.save();
@@ -33,25 +33,29 @@ fruits.save();
 const personSchema = new mongoose.Schema({
   name: String,
   age: Number,
-  favouriteFruit: fruitSchema 
-})
+  favouriteFruit: fruitSchema,
+});
 
 const Person = mongoose.model("Person", personSchema);
 const mango = new fruit({
   name: "mango",
   rating: 9,
-  review: "great staff"
-})
+  review: "great staff",
+});
 
-Person.updateOne({name:"ALEXANER"}, {favouriteFruit: "mango"}, function (err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("AJ LIKES MANGO");
+Person.updateOne(
+  { name: "ALEXANER" },
+  { favouriteFruit: "mango" },
+  function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("AJ LIKES MANGO");
+    }
   }
-} );
+);
 
-mango.save()
+mango.save();
 
 // const person = new Person ({
 //   name: "ANDER",
@@ -83,18 +87,18 @@ mango.save()
 //   if (err) {
 //     console.log(err)
 //   } else {
-//    console.log("Successfully saved all the fruits to fruitsDB") 
+//    console.log("Successfully saved all the fruits to fruitsDB")
 //   }
 // });
 
-fruit.find( function(err, fruits) {
+fruit.find(function (err, fruits) {
   if (err) {
     console.log(err);
   } else {
     //console.log(fruits);
-  fruits.forEach( function(fruit) {
-    console.log(fruit.name);
-  });
+    fruits.forEach(function (fruit) {
+      console.log(fruit.name);
+    });
   }
 });
 
@@ -142,24 +146,15 @@ fruit.find( function(err, fruits) {
 // } );
 
 const bookSchema = new mongoose.Schema({
-   name: String,
-   rating: Number,
-   review: String
- })
+  name: String,
+  rating: Number,
+  review: String,
+});
 const Book = mongoose.model("Book", bookSchema);
-const book = new Book ({
+const book = new Book({
   name: "Bible",
   rating: 5,
-  review: "wonderful book"
+  review: "wonderful book",
 });
 
 //book.save();
-
-
-
-
-
-
-
-
-
